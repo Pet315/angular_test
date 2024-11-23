@@ -1,1 +1,16 @@
-<p>weather-details works!</p>
+<div *ngIf="weather" class="container my-4">
+  <h4 class="text-center mb-4">Weather Information</h4>
+  
+  <div class="card text-center shadow-sm">
+    <div class="card-body">
+      <img [src]="'/assets/' + getWeatherIcon(weather.weathercode, weather.is_day).iconPath" 
+           alt="{{ getWeatherIcon(weather.weathercode, weather.is_day).iconPath }}" 
+           class="card-img-top mb-3" style="max-width: 100px; height: auto; margin: 0 auto;">
+      
+      <p class="card-text mb-3">{{ getWeatherIcon(weather.weathercode, weather.is_day).description }}</p>
+      <p class="card-text"><strong>Temperature:</strong> {{ weather.temperature }}°C</p>
+      <p class="card-text"><strong>Wind Speed:</strong> {{ weather.windspeed }} km/h</p>
+    </div>
+  </div>
+</div>
+

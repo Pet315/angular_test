@@ -1,1 +1,29 @@
-<p>user-list works!</p>
+<div class="d-flex justify-content-center flex-wrap" style="margin-top: 20px; margin-bottom: 20px;">
+  <div *ngFor="let user of users" class="card mb-4" style="max-width: 300px; margin: 10px; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column;">
+    <img [src]="user.picture.large" alt="User Image" class="card-img-top">
+    
+    <div class="card-body d-flex flex-column" style="flex-grow: 1;">
+      <h4 class="text-center mb-4">{{ user.name.first }} {{ user.name.last }}</h4>
+
+      <div class="card text-center shadow-sm">
+        <div class="card-body">          
+          <p class="card-text"><strong>Gender:</strong> {{ user.gender }}</p>
+          <p class="card-text"><strong>Location:</strong> {{ user.location.city }}, {{ user.location.country }}</p>
+          <p class="card-text"><strong>Email:</strong> {{ user.email }}</p>
+        </div>
+      </div>
+      
+      <!-- Перевірка на координати для виведення погодних даних -->
+      <app-weather-details
+        *ngIf="user.location.coordinates"
+        [latitude]="user.location.coordinates.latitude"
+        [longitude]="user.location.coordinates.longitude"
+        style="margin-top: auto;">
+      </app-weather-details>
+    </div>
+  </div>
+</div>
+
+
+
+
