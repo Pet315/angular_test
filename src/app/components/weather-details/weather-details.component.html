@@ -3,13 +3,15 @@
   
   <div class="card text-center shadow-sm">
     <div class="card-body">
-      <img [src]="'/assets/' + getWeatherIcon(weather.weathercode, weather.is_day).iconPath" 
+      <img [src]="'/angular_test/assets/' + getWeatherIcon(weather.weathercode, weather.is_day).iconPath" 
            alt="{{ getWeatherIcon(weather.weathercode, weather.is_day).iconPath }}" 
            class="card-img-top mb-3" style="max-width: 100px; height: auto; margin: 0 auto;">
       
       <p class="card-text mb-3">{{ getWeatherIcon(weather.weathercode, weather.is_day).description }}</p>
-      <p class="card-text"><strong>Temperature:</strong> {{ weather.temperature }}°C</p>
-      <p class="card-text"><strong>Wind Speed:</strong> {{ weather.windspeed }} km/h</p>
+      <p class="card-text"><strong>Current Temperature:</strong> {{ weather.temperature }}°C</p>
+      <p class="card-text"><strong>Highest Temperature:</strong> {{ maxTemperature }}°C</p>
+      <p class="card-text"><strong>Lowest Temperature:</strong> {{ minTemperature }}°C</p>
+
     </div>
   </div>
 </div>

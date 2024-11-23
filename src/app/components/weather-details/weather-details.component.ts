@@ -15,6 +15,8 @@ export class WeatherDetailsComponent implements OnInit {
   @Input() longitude!: number;
 
   weather: any;
+  maxTemperature: any;
+  minTemperature: any;
 
   constructor(private weatherService: WeatherService) {}
 
@@ -23,6 +25,9 @@ export class WeatherDetailsComponent implements OnInit {
       this.weatherService.getWeather(this.latitude, this.longitude).subscribe({
         next: (response) => {
           this.weather = response.current_weather;
+          this.maxTemperature = Math.max(...response.hourly.temperature_2m.slice(0, 24));
+          this.minTemperature = Math.min(...response.hourly.temperature_2m.slice(0, 24));
+          // console.warn(response.hourly.time.slice(0, 24))
         },
         error: (err) => {
           console.error('Error loading weather data:', err);
@@ -31,7 +36,12 @@ export class WeatherDetailsComponent implements OnInit {
     } else {
       console.warn('Latitude and Longitude must be provided.');
     }
+
   }
+
+  // getTemperature(temperature: Array<number>) {
+  //   return temperature[0];
+  // }
 
   getWeatherIcon(weatherCode: number, isDay: boolean): { iconPath: string, description: string } {
     const weatherIcons: { [key: number]: string } = {
@@ -49,7 +59,6 @@ export class WeatherDetailsComponent implements OnInit {
       50: 'mist',
     };
   
-    // Визначення опису погоди
     const descriptions: { [key: number]: string } = {
       0: 'Clear sky',
       1: 'Partly cloudy',
